@@ -70,6 +70,10 @@ These are **examples of expected development artifacts**, not files that must al
 
 ## Good repository habits
 
+The `player_master_bronze` serverless bundle job loads player Parquet into the
+Bronze Delta table. See [Player master Bronze job](docs/player_master_bronze.md)
+for prerequisites, full-replacement behavior, deployment, and validation.
+
 - **Preserve the original data.** Do not overwrite, rename, or silently correct the files in `data/raw/`.
 - **Use the dictionaries.** Confirm field definitions and relationships before building transformations.
 - **Review AI-generated changes.** Ask Codex to explain its plan and inspect the changes before accepting them.

@@ -1,0 +1,10 @@
+resources:
+  jobs:
+    player_master_bronze:
+      name: player_master_bronze
+      max_concurrent_runs: 1
+      tasks:
+        - task_key: ingest_player_master
+          notebook_task:
+            notebook_path: ../src/player_master_bronze.py
+            source: WORKSPACE
