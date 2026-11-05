@@ -70,6 +70,10 @@ These are **examples of expected development artifacts**, not files that must al
 
 ## Good repository habits
 
+The separate `regions_bronze` serverless bundle job loads region Parquet into
+Bronze. See [Regions Bronze job](docs/regions_bronze.md) for prerequisites,
+full-replacement behavior, deployment, and validation.
+
 The `player_master_bronze` serverless bundle job loads player Parquet into the
 Bronze Delta table. See [Player master Bronze job](docs/player_master_bronze.md)
 for prerequisites, full-replacement behavior, deployment, and validation.
