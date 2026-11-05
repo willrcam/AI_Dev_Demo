@@ -14,6 +14,16 @@ required. Run Spark processing in Databricks, not locally.
   Preserve date strings, observed decimal precision, nulls, and duplicate rows.
   No additional columns or business transformations are applied.
 
+Approved source-contract exception: the uploaded lab Parquet was observed to
+store `global_percentile` as STRING instead of the dictionary's DECIMAL(scale 2).
+The job accepts either type and logs a WARNING when it encounters STRING,
+preserving all values without casting. Silver must validate and convert these
+strings before publishing its required numeric column. The source dictionary is
+unchanged. All other source type checks remain enforced, including scale 2 when
+`global_percentile` is a decimal. This exception does not enable destination
+schema evolution: an existing decimal destination still requires review before
+it can be replaced with a string column.
+
 Assume the supplied file is a complete lab snapshot. Monthly incremental files
 are not accumulated or merged by this job. Confirm this with the instructor
 before execution if the source release is uncertain. Keep the source file stable

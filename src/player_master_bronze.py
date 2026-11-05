@@ -50,6 +50,14 @@ def validate_schema(schema):
     if schema.fieldNames() != expected_names:
         raise ValueError(f"Expected ordered columns {expected_names}; got {schema.fieldNames()}")
     for field, (_, expected_type) in zip(schema.fields, EXPECTED_COLUMNS):
+        # Approved exception for the observed lab export; preserve raw values.
+        if field.name == "global_percentile" and isinstance(field.dataType, StringType):
+            logger.warning(
+                "Source contract discrepancy: global_percentile is STRING; "
+                "dictionary expects DECIMAL with scale 2. Preserving strings "
+                "in Bronze; numeric conversion and validation belong in Silver."
+            )
+            continue
         if not isinstance(field.dataType, expected_type):
             raise ValueError(f"Unexpected type for {field.name}: {field.dataType}")
         if isinstance(field.dataType, DecimalType):
